@@ -1,3 +1,4 @@
+import { ThemeProvider } from './context/ThemeContext'
 import Navbar   from './components/layout/Navbar'
 import Footer   from './components/layout/Footer'
 import Hero     from './components/sections/Hero'
@@ -7,31 +8,32 @@ import Projects from './components/sections/Projects'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-slate-900 font-sans text-slate-100">
-      <Navbar />
-      <main>
-        <Hero />
+    <ThemeProvider>
+      <div className="min-h-screen bg-slate-50 font-sans text-slate-900 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100">
+        <Navbar />
+        <main>
+          <Hero />
 
-        {/* Divider */}
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
-        </div>
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent dark:via-slate-700" />
+          </div>
 
-        <About />
+          <About />
 
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
-        </div>
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent dark:via-slate-700" />
+          </div>
 
-        <Skills />
+          <Skills />
 
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
-        </div>
+          <div className="mx-auto max-w-6xl px-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent dark:via-slate-700" />
+          </div>
 
-        <Projects />
-      </main>
-      <Footer />
-    </div>
+          <Projects />
+        </main>
+        <Footer />
+      </div>
+    </ThemeProvider>
   )
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, Code2 } from 'lucide-react'
+import { Menu, X, Code2, Sun, Moon } from 'lucide-react'
+import { useTheme } from '../../context/ThemeContext'
 
 const navLinks = [
   { label: 'Home',     href: '#hero'     },
@@ -9,8 +10,9 @@ const navLinks = [
 ]
 
 export default function Navbar() {
-  const [isOpen, setIsOpen]       = useState(false)
-  const [scrolled, setScrolled]   = useState(false)
+  const [isOpen, setIsOpen]     = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const { theme, toggleTheme }  = useTheme()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -27,7 +29,7 @@ export default function Navbar() {
     <header
       className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? 'border-b border-slate-700/60 bg-slate-900/90 backdrop-blur-md shadow-lg shadow-black/20'
+          ? 'border-b border-slate-200/60 bg-white/90 shadow-lg shadow-black/5 backdrop-blur-md dark:border-slate-700/60 dark:bg-slate-900/90 dark:shadow-black/20'
           : 'bg-transparent'
       }`}
     >
@@ -35,12 +37,12 @@ export default function Navbar() {
         {/* Logo */}
         <button
           onClick={() => handleNav('#hero')}
-          className="flex items-center gap-2 text-xl font-bold text-white"
+          className="flex items-center gap-2 text-xl font-bold text-slate-900 dark:text-white"
         >
-          <Code2 size={22} className="text-indigo-400" />
-          <span className="font-mono text-indigo-400">&lt;</span>
+          <Code2 size={22} className="text-indigo-500 dark:text-indigo-400" />
+          <span className="font-mono text-indigo-500 dark:text-indigo-400">&lt;</span>
           <span>Aditya</span>
-          <span className="font-mono text-indigo-400">/&gt;</span>
+          <span className="font-mono text-indigo-500 dark:text-indigo-400">/&gt;</span>
         </button>
 
         {/* Desktop links */}
@@ -49,7 +51,7 @@ export default function Navbar() {
             <li key={href}>
               <button
                 onClick={() => handleNav(href)}
-                className="text-sm font-medium text-slate-400 transition-colors hover:text-white"
+                className="text-sm font-medium text-slate-500 transition-colors hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
               >
                 {label}
               </button>
@@ -58,32 +60,51 @@ export default function Navbar() {
           <li>
             <a
               href="/resume.pdf"
-              className="rounded-lg border border-indigo-500 px-4 py-2 text-sm font-medium text-indigo-400 transition-all hover:bg-indigo-500 hover:text-white"
+              className="rounded-lg border border-indigo-500 px-4 py-2 text-sm font-medium text-indigo-500 transition-all hover:bg-indigo-500 hover:text-white dark:text-indigo-400"
             >
               Resume
             </a>
           </li>
+          {/* Theme toggle */}
+          <li>
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-100 text-slate-600 transition-all hover:border-indigo-400 hover:text-indigo-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:text-indigo-400"
+            >
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+          </li>
         </ul>
 
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="text-slate-300 transition-colors hover:text-white md:hidden"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile: theme toggle + hamburger */}
+        <div className="flex items-center gap-3 md:hidden">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-100 text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
+          >
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}
       {isOpen && (
-        <div className="border-t border-slate-700/60 bg-slate-900/95 px-6 pb-6 pt-4 backdrop-blur-md md:hidden">
+        <div className="border-t border-slate-200/60 bg-white/95 px-6 pb-6 pt-4 backdrop-blur-md dark:border-slate-700/60 dark:bg-slate-900/95 md:hidden">
           <ul className="flex flex-col gap-4">
             {navLinks.map(({ label, href }) => (
               <li key={href}>
                 <button
                   onClick={() => handleNav(href)}
-                  className="w-full text-left text-base font-medium text-slate-300 transition-colors hover:text-white"
+                  className="w-full text-left text-base font-medium text-slate-600 transition-colors hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
                 >
                   {label}
                 </button>
@@ -92,7 +113,7 @@ export default function Navbar() {
             <li>
               <a
                 href="/resume.pdf"
-                className="inline-block rounded-lg border border-indigo-500 px-4 py-2 text-sm font-medium text-indigo-400 transition-all hover:bg-indigo-500 hover:text-white"
+                className="inline-block rounded-lg border border-indigo-500 px-4 py-2 text-sm font-medium text-indigo-500 transition-all hover:bg-indigo-500 hover:text-white dark:text-indigo-400"
               >
                 Resume
               </a>
