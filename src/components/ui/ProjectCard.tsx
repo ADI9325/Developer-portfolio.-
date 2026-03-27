@@ -9,12 +9,12 @@ interface Props {
 export default function ProjectCard({ project, index }: Props) {
   return (
     <div
-      className="group flex flex-col rounded-2xl border border-slate-700 bg-slate-800 p-6 transition-all duration-300 hover:border-indigo-500/60 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1"
+      className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:border-indigo-400/60 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1 dark:border-slate-700 dark:bg-slate-800 dark:hover:border-indigo-500/60"
       style={{ animationDelay: `${index * 100}ms` }}
     >
       {/* Header */}
       <div className="mb-4 flex items-start justify-between">
-        <div className="rounded-lg bg-indigo-500/10 p-2.5 text-indigo-400 transition-colors group-hover:bg-indigo-500/20">
+        <div className="rounded-lg bg-indigo-50 p-2.5 text-indigo-500 transition-colors group-hover:bg-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-400 dark:group-hover:bg-indigo-500/20">
           <Folder size={22} strokeWidth={1.5} />
         </div>
         <div className="flex gap-3">
@@ -23,7 +23,7 @@ export default function ProjectCard({ project, index }: Props) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 transition-colors hover:text-white"
+              className="text-slate-400 transition-colors hover:text-slate-700 dark:hover:text-white"
               aria-label="GitHub repository"
             >
               <Github size={19} />
@@ -34,7 +34,7 @@ export default function ProjectCard({ project, index }: Props) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 transition-colors hover:text-indigo-400"
+              className="text-slate-400 transition-colors hover:text-indigo-500 dark:hover:text-indigo-400"
               aria-label="Live demo"
             >
               <ExternalLink size={19} />
@@ -44,12 +44,12 @@ export default function ProjectCard({ project, index }: Props) {
       </div>
 
       {/* Title */}
-      <h3 className="mb-2 text-lg font-semibold text-slate-100 group-hover:text-indigo-400 transition-colors">
+      <h3 className="mb-2 text-lg font-semibold text-slate-900 transition-colors group-hover:text-indigo-600 dark:text-slate-100 dark:group-hover:text-indigo-400">
         {project.title}
       </h3>
 
       {/* Description */}
-      <p className="mb-5 flex-1 text-sm leading-relaxed text-slate-400">
+      <p className="mb-5 flex-1 text-sm leading-relaxed text-slate-500 dark:text-slate-400">
         {project.description}
       </p>
 
@@ -58,7 +58,7 @@ export default function ProjectCard({ project, index }: Props) {
         {project.techStack.map((tech) => (
           <span
             key={tech}
-            className="rounded-full bg-slate-700 px-3 py-1 text-xs font-medium text-slate-300"
+            className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:bg-slate-700 dark:text-slate-300"
           >
             {tech}
           </span>
